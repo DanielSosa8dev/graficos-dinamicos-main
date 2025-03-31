@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructura de Datos Stack</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Estructura de Datos Stack</h1>
+        <p class="subtitle">Aprende el principio LIFO con ejemplos interactivos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/login">Iniciar sesión</a></li>
+            <li><a href="/register">Registrarse</a></li>
+            <li><a href="/exercises">Ejercicios</a></li>
+            <li><a href="/evaluation">Evaluación</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Sección conceptual -->
+        <section class="concept-section">
+            <div class="definition-card">
+                <h2>¿Qué es un Stack?</h2>
+                <p>Un <strong>Stack</strong> (Pila) es una estructura de datos lineal que sigue el principio <span class="highlight">LIFO</span> (Last In, First Out). Esto significa que el último elemento agregado será el primero en ser eliminado.</p>
+                
+                <div class="analogy-container">
+                    <h3>Analogías del mundo real:</h3>
+                    <div class="analogy-cards">
+                        <div class="analogy-card">
+                            <div class="analogy-icon">🍽️</div>
+                            <p>Pila de platos en un restaurante</p>
+                        </div>
+                        <div class="analogy-card">
+                            <div class="analogy-icon">📚</div>
+                            <p>Pila de libros en una mesa</p>
+                        </div>
+                        <div class="analogy-card">
+                            <div class="analogy-icon">⏪</div>
+                            <p>Botón "Atrás" en el navegador</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="operation-principles">
+                <h3>Principios Fundamentales</h3>
+                <ul>
+                    <li>Solo se puede acceder al elemento superior (top)</li>
+                    <li>Operaciones básicas: Push (insertar) y Pop (eliminar)</li>
+                    <li>Operaciones secundarias: Peek (observar) y isEmpty (verificar vacío)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Visualización interactiva -->
+        <section id="stack-visualization">
+            <h2>Demostración Interactiva</h2>
+            <p class="canvas-description">Experimenta con este stack visual. Observa cómo funcionan las operaciones básicas:</p>
+            
+            <canvas id="stack-canvas" width="300" height="400"></canvas>
+            
+            <div class="canvas-controls">
+                <input type="text" id="canvas-stack-value" placeholder="Valor" maxlength="3" inputmode="numeric">
+                <button id="canvas-push-btn">➕ Push</button>
+                <button id="canvas-pop-btn">➖ Pop</button>
+                <button id="canvas-peek-btn">👁️ Peek</button>
+                <button id="canvas-clear-btn">🗑️ Clear</button>
+                <button id="canvas-random-btn">🎲 Nuevo Ejemplo</button>
+            </div>
+            
+            <div id="canvas-operation-result"></div>
+        </section>
+
+        <!-- Operaciones detalladas -->
+        <section class="operations-section">
+            <h2>Operaciones del Stack</h2>
+            
+            <div class="operations-grid">
+                <div class="operation-card">
+                    <div class="operation-header push-header">
+                        <h3>Push</h3>
+                        <div class="operation-icon">➕</div>
+                    </div>
+                    <p>Agrega un elemento en la cima del stack</p>
+                    <div class="operation-code">
+                        <code>stack.push(value);</code>
+                    </div>
+                    <div class="operation-complexity">
+                        Complejidad: <span class="complexity-badge">O(1)</span>
+                    </div>
+                </div>
+
+                <div class="operation-card">
+                    <div class="operation-header pop-header">
+                        <h3>Pop</h3>
+                        <div class="operation-icon">➖</div>
+                    </div>
+                    <p>Elimina y retorna el elemento de la cima</p>
+                    <div class="operation-code">
+                        <code>var top = stack.pop();</code>
+                    </div>
+                    <div class="operation-complexity">
+                        Complejidad: <span class="complexity-badge">O(1)</span>
+                    </div>
+                </div>
+
+                <div class="operation-card">
+                    <div class="operation-header peek-header">
+                        <h3>Peek</h3>
+                        <div class="operation-icon">👁️</div>
+                    </div>
+                    <p>Observa el elemento en la cima sin eliminarlo</p>
+                    <div class="operation-code">
+                        <code>var top = stack.peek();</code>
+                    </div>
+                    <div class="operation-complexity">
+                        Complejidad: <span class="complexity-badge">O(1)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementación en código -->
+        <section class="implementation-section">
+            <h2>Implementación en C#</h2>
+            <div class="code-container">
+                <div class="code-tabs">
+                    <button class="code-tab active" data-tab="array">Array Implementation</button>
+                    <button class="code-tab" data-tab="linked">Linked List</button>
+                </div>
+                
+                <div class="code-content active" id="array-code">
+                    <pre><code class="language-csharp">
+public class ArrayStack {
+    private int[] _items;
+    private int _top = -1;
+    private int _capacity;
+
+    public ArrayStack(int capacity) {
+        _capacity = capacity;
+        _items = new int[capacity];
+    }
+
+    public void Push(int item) {
+        if (_top == _capacity - 1)
+            throw new StackOverflowException();
+        _items[++_top] = item;
+    }
+
+    public int Pop() {
+        if (IsEmpty)
+            throw new InvalidOperationException("Stack is empty");
+        return _items[_top--];
+    }
+
+    public int Peek() => IsEmpty 
+        ? throw new InvalidOperationException("Stack is empty") 
+        : _items[_top];
+
+    public bool IsEmpty => _top == -1;
+    public int Count => _top + 1;
+}
+                    </code></pre>
+                </div>
+                
+                <div class="code-content" id="linked-code">
+                    <pre><code class="language-csharp">
+public class Node {
+    public int Data { get; set; }
+    public Node Next { get; set; }
+    
+    public Node(int data) {
+        Data = data;
+    }
+}
+
+public class LinkedStack {
+    private Node _top;
+    private int _count;
+
+    public void Push(int data) {
+        var newNode = new Node(data);
+        newNode.Next = _top;
+        _top = newNode;
+        _count++;
+    }
+
+    public int Pop() {
+        if (_top == null)
+            throw new InvalidOperationException("Stack is empty");
+        
+        var data = _top.Data;
+        _top = _top.Next;
+        _count--;
+        return data;
+    }
+
+    public int Peek() => _top == null 
+        ? throw new InvalidOperationException("Stack is empty") 
+        : _top.Data;
+
+    public bool IsEmpty => _top == null;
+    public int Count => _count;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aplicaciones prácticas -->
+        <section class="applications-section">
+            <h2>Aplicaciones del Stack</h2>
+            
+            <div class="applications-grid">
+                <div class="application-card">
+                    <h3>Evaluación de Expresiones</h3>
+                    <p>Conversión de infijo a postfijo y evaluación de expresiones matemáticas</p>
+                </div>
+                
+                <div class="application-card">
+                    <h3>Llamadas a Funciones</h3>
+                    <p>Administración del call stack en la ejecución de programas</p>
+                </div>
+                
+                <div class="application-card">
+                    <h3>Algoritmos de Grafos</h3>
+                    <p>Implementación de DFS (Depth-First Search)</p>
+                </div>
+                
+                <div class="application-card">
+                    <h3>Historial de Navegación</h3>
+                    <p>Implementación del botón "Atrás" en navegadores web</p>
+                </div>
+            </div>
+        </section>
+        <section class="bibliography-section">
+            <h2>Bibliografía</h2>
+            <div class="bibliography-container">
+                <div class="citation-card">
+                    <h3>Referencia Principal</h3>
+                    <p class="citation">Karumanchi, N. (2017). <em>Data Structures and Algorithms Made Easy: Data Structures and Algorithmic Puzzles</em> (5th ed.). CareerMonk Publications.</p>
+                    <p class="citation-note">Este libro proporciona una excelente explicación sobre las estructuras de datos fundamentales, incluyendo stacks, con ejemplos prácticos y problemas para resolver.</p>
+                </div>
+                
+                <div class="citation-card">
+                    <h3>Referencias Adicionales</h3>
+                    <p class="citation">Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). <em>Introduction to Algorithms</em> (3rd ed.). MIT Press.</p>
+                    <p class="citation">Sedgewick, R., & Wayne, K. (2011). <em>Algorithms</em> (4th ed.). Addison-Wesley Professional.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Stack - Estructuras de Datos - Todos los derechos reservados</p>
+        <p class="footer-note">Este material educativo está basado en parte en el trabajo de Narasimha Karumanchi (2017).</p>
+    </footer>
+
+    <script src="/js/concepts.js"></script>
+</body>
+</html>

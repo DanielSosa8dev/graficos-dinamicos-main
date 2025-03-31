@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Stack</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Estructura de Datos Stack</h1>
+        <p class="subtitle">Aprende el principio LIFO con ejemplos interactivos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/views/index.html">Inicio</a></li>
+            <li><a href="/login">Iniciar sesión</a></li>
+            <li><a href="/register">Registrarse</a></li>
+            <li><a href="/exercises">Ejercicios</a></li>
+            <li><a href="/evaluation">Evaluación</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section class="exercise-container">
+            <div class="question-container">
+                <h2>Ejercicio Práctico</h2>
+                <div id="question">Cargando pregunta...</div>
+                <div id="options">
+                    <!-- Opciones se llenarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button id="checkAnswerButton" class="btn-primary">Verificar respuesta</button>
+                <button id="showAnswerButton" class="btn-secondary">Mostrar respuesta correcta</button>
+            </div>
+
+            <div id="response"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Stack - Estructuras de Datos - Todos los derechos reservados</p>
+        <p class="footer-note">Este material educativo está basado en parte en el trabajo de Narasimha Karumanchi (2017).</p>
+    </footer>
+
+    <script>
+        // Variable global para almacenar el ejercicio actual
+        let currentExercise;
+
+        // Función para cargar un ejercicio aleatorio
+        function loadRandomExercise() {
+            // Simulación de datos - en producción esto vendría de una API
+            const sampleExercises = [
+                {
+                    pregunta: "¿Cuál es el resultado de las siguientes operaciones de stack? Push(5), Push(8), Pop(), Push(2), Pop()",
+                    opciones: [
+                        "Stack vacío",
+                        "[5, 2]",
+                        "[5, 8]",
+                        "[5]"
+                    ],
+                    respuesta_correcta: "[5]",
+                    explicacion: "Push(5) → [5], Push(8) → [5,8], Pop() → [5], Push(2) → [5,2], Pop() → [5]"
+                },
+                {
+                    pregunta: "¿Qué principio describe el comportamiento de un stack?",
+                    opciones: [
+                        "FIFO (First In First Out)",
+                        "LIFO (Last In First Out)",
+                        "FILO (First In Last Out)",
+                        "Ambos LIFO y FILO"
+                    ],
+                    respuesta_correcta: "Ambos LIFO y FILO",
+                    explicacion: "Un stack sigue el principio LIFO (Last In First Out) que es equivalente a FILO (First In Last Out)"
+                },
+                {
+                    pregunta: "¿Cuál de estas NO es una operación válida de stack?",
+                    opciones: [
+                        "Push",
+                        "Pop",
+                        "Peek",
+                        "Enqueue"
+                    ],
+                    respuesta_correcta: "Enqueue",
+                    explicacion: "Enqueue es una operación de queue, no de stack"
+                }
+            ];
+
+            // Seleccionar un ejercicio aleatorio
+            currentExercise = sampleExercises[Math.floor(Math.random() * sampleExercises.length)];
+            
+            document.getElementById('question').textContent = currentExercise.pregunta;
+
+            // Agregar las opciones al HTML
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = ''; // Limpiar opciones anteriores
+
+            currentExercise.opciones.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option');
+                optionsContainer.appendChild(button);
+
+                button.addEventListener('click', () => {
+                    // Marcar la opción seleccionada
+                    optionsContainer.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    button.classList.add('selected');
+                    
+                    // Limpiar respuesta anterior
+                    document.getElementById('response').textContent = '';
+                    document.getElementById('response').className = '';
+                });
+            });
+        }
+
+        // Cargar el primer ejercicio al iniciar
+        loadRandomExercise();
+
+        // Verificar respuesta seleccionada
+        document.getElementById('checkAnswerButton').addEventListener('click', () => {
+            const selectedOption = document.querySelector('.option.selected');
+            const responseElement = document.getElementById('response');
+            
+            if (selectedOption) {
+                const isCorrect = selectedOption.textContent === currentExercise.respuesta_correcta;
+                
+                if (isCorrect) {
+                    selectedOption.classList.add('correct');
+                    responseElement.textContent = "¡Correcto! " + currentExercise.explicacion;
+                    responseElement.className = 'correct-response';
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    responseElement.textContent = "Incorrecto. " + currentExercise.explicacion;
+                    responseElement.className = 'incorrect-response';
+                }
+            } else {
+                responseElement.textContent = "Por favor, selecciona una opción primero.";
+                responseElement.className = 'info-response';
+            }
+        });
+
+        // Mostrar la respuesta correcta
+        document.getElementById('showAnswerButton').addEventListener('click', () => {
+            const allOptions = document.querySelectorAll('.option');
+            const responseElement = document.getElementById('response');
+            
+            allOptions.forEach(option => {
+                if (option.textContent === currentExercise.respuesta_correcta) {
+                    option.classList.add('correct');
+                }
+            });
+
+            responseElement.textContent = "La respuesta correcta es: " + currentExercise.respuesta_correcta + ". " + currentExercise.explicacion;
+            responseElement.className = 'correct-response';
+        });
+    </script>
+</body>
+</html>

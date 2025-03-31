@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Stack</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/evaluation.css">
+</head>
+<body>
+    <header>
+        <h1>Estructura de Datos Stack</h1>
+        <p class="subtitle">Aprende el principio LIFO con ejemplos interactivos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/login">Iniciar sesión</a></li>
+            <li><a href="/register">Registrarse</a></li>
+            <li><a href="/concepts">Conceptos</a></li>
+            <li><a href="/exercises">Ejercicios</a></li>
+            <li><a href="/evaluation">Evaluación</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="evaluation-container">
+            <h1>Evaluación de Conceptos de Stack</h1>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div id="quizContent">
+                <div class="question-container">
+                    <div class="question-number" id="questionNumber">Pregunta 1 de 10</div>
+                    <div class="question-text" id="questionText">Cargando pregunta...</div>
+                    
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Las opciones se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn-primary" id="prevButton" style="display: none;">Anterior</button>
+                    <button class="btn-primary" id="nextButton">Siguiente</button>
+                    <button class="btn-success" id="submitButton" style="display: none;">Verificar Respuestas</button>
+                </div>
+            </div>
+            
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <h2>Resultados de la Evaluación</h2>
+                <div class="score" id="finalScore">0/10</div>
+                <p class="result-message" id="resultMessage"></p>
+                <button class="btn-primary restart-btn" id="restartButton">Intentar de nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Estructuras de Datos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="/js/evaluation.js"></script>
+</body>
+</html>
